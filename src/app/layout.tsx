@@ -1,0 +1,86 @@
+import type { Metadata } from 'next'
+import { Hanken_Grotesk } from 'next/font/google'
+import { Header } from '@/components/layout/header'
+import Footer from '@/components/layout/footer'
+import './globals.css'
+
+const hankenGrotesk = Hanken_Grotesk({ 
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-hanken-grotesk',
+})
+
+export const metadata: Metadata = {
+  title: {
+    default: 'Olanozun Maria Raiwe - Product Leader & Co-Founder',
+    template: '%s | Olanozun Maria Raiwe'
+  },
+  description: 'Transforming complex data into intuitive, high-growth consumer products. Product Leader specializing in strategic leadership, product growth, and platform scaling.',
+  keywords: ['product management', 'platform scaling', 'AI ethics', 'developer experience', 'product growth', 'Ola Raiwe'],
+  authors: [{ name: 'Olanozun Maria Raiwe' }],
+  creator: 'Olanozun Maria Raiwe',
+  publisher: 'Olanozun Maria Raiwe',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL('https://olaraiwe.com'),
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://olaraiwe.com',
+    title: 'Ola Raiwe - Product Leader & Co-Founder',
+    description: 'Transforming complex data into intuitive, high-growth consumer products.',
+    siteName: 'Ola Raiwe',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Ola Raiwe - Product Leader',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Ola Raiwe - Product Leader & Co-Founder',
+    description: 'Transforming complex data into intuitive, high-growth consumer products.',
+    creator: '@olaraiwe',
+    images: ['/og-image.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" className={hankenGrotesk.variable}>
+      <body className="font-sans antialiased min-h-screen bg-white text-black">
+        <div className="flex min-h-screen flex-col">
+          <Header />
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </div>
+      </body>
+    </html>
+  )
+}
