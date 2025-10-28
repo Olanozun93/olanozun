@@ -33,6 +33,11 @@ const footerSections = [
   }
 ]
 
+// Newsletter Modal Component (keep your existing)
+function NewsletterModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  // ... your existing newsletter modal code
+}
+
 // Scroll to Top Button Component
 function ScrollToTopButton() {
   const scrollToTop = () => {
@@ -50,110 +55,7 @@ function ScrollToTopButton() {
   )
 }
 
-// Newsletter Modal Component
-function NewsletterModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-  const [formData, setFormData] = useState({ name: '', email: '' })
-  const [isSubmitted, setIsSubmitted] = useState(false)
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Basic email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(formData.email)) {
-      alert('Please enter a valid email address')
-      return
-    }
-    
-    // Here you would typically send the data to your backend
-    console.log('Newsletter signup:', formData)
-    setIsSubmitted(true)
-    
-    // Close modal and scroll to top after 2 seconds
-    setTimeout(() => {
-      onClose()
-      setIsSubmitted(false)
-      setFormData({ name: '', email: '' })
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    }, 2000)
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }))
-  }
-
-  if (!isOpen) return null
-
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-2xl p-8 max-w-md w-full mx-auto shadow-2xl">
-        {isSubmitted ? (
-          <div className="text-center">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-            </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">Thank You!</h3>
-            <p className="text-gray-600">You've been added to our newsletter list.</p>
-            <p className="text-gray-500 text-sm mt-2">Redirecting you back...</p>
-          </div>
-        ) : (
-          <>
-            <div className="text-center mb-6">
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">Join My Newsletter</h3>
-              <p className="text-gray-600">Get insights on product strategy, AI ethics, and platform scaling.</p>
-            </div>
-            
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Your full name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff581b] focus:border-transparent"
-                />
-              </div>
-              
-              <div>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="your.email@example.com"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff581b] focus:border-transparent"
-                />
-              </div>
-              
-              <button
-                type="submit"
-                className="w-full bg-[#ff581b] text-white py-3 rounded-lg font-semibold hover:bg-[#e04e17] transition-colors"
-              >
-                Subscribe Now
-              </button>
-            </form>
-            
-            <button
-              onClick={onClose}
-              className="w-full mt-4 text-gray-500 hover:text-gray-700 transition-colors"
-            >
-              Maybe later
-            </button>
-          </>
-        )}
-      </div>
-    </div>
-  )
-}
-
-// Custom Modal for Privacy Policy and Terms of Service
+// Custom Modal with reduced height and accent scrollbar
 const CustomModal = ({ isOpen, onClose, children }: { isOpen: boolean; onClose: () => void; children: React.ReactNode }) => {
   if (!isOpen) return null
 
@@ -186,8 +88,74 @@ const PrivacyPolicyContent = () => (
     <div className="prose prose-lg max-w-none">
       <h2 className="text-2xl font-bold mb-6 text-gray-900">Privacy Policy</h2>
       
-      {/* ... your existing privacy policy content ... */}
-      
+      <section className="mb-8">
+        <h3 className="text-xl font-bold mb-4 text-gray-900">Introduction</h3>
+        <p className="text-gray-700 mb-4">
+          Welcome to Olanozun Maria Raiwe&apos;s website. I respect your privacy and am committed to protecting 
+          your personal data. This privacy policy will inform you about how I look after your 
+          personal data when you visit my website and tell you about your privacy rights.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h3 className="text-xl font-bold mb-4 text-gray-900">Data I Collect</h3>
+        <p className="text-gray-700 mb-4">
+          I may collect, use, store, and transfer different kinds of personal data about you, including:
+        </p>
+        <ul className="text-gray-700 list-disc list-inside space-y-2">
+          <li><strong>Identity Data:</strong> First name, last name, username, or similar identifier</li>
+          <li><strong>Contact Data:</strong> Email address, telephone numbers</li>
+          <li><strong>Technical Data:</strong> Internet protocol (IP) address, browser type and version, time zone setting and location</li>
+          <li><strong>Usage Data:</strong> Information about how you use my website and services</li>
+        </ul>
+      </section>
+
+      <section className="mb-8">
+        <h3 className="text-xl font-bold mb-4 text-gray-900">How I Use Your Data</h3>
+        <p className="text-gray-700 mb-4">
+          I will only use your personal data when the law allows me to. Most commonly, I will use your 
+          personal data in the following circumstances:
+        </p>
+        <ul className="text-gray-700 list-disc list-inside space-y-2">
+          <li>To respond to your inquiries and provide customer support</li>
+          <li>To send you marketing communications (where you have requested them)</li>
+          <li>To improve my website and services</li>
+          <li>To comply with legal obligations</li>
+        </ul>
+      </section>
+
+      <section className="mb-8">
+        <h3 className="text-xl font-bold mb-4 text-gray-900">Data Security</h3>
+        <p className="text-gray-700">
+          I have put in place appropriate security measures to prevent your personal data from being 
+          accidentally lost, used, or accessed in an unauthorized way. I limit access to your personal 
+          data to those who have a genuine business need to know it.
+        </p>
+      </section>
+
+      <section>
+        <h3 className="text-xl font-bold mb-4 text-gray-900">Your Legal Rights</h3>
+        <p className="text-gray-700 mb-4">
+          Under certain circumstances, you have rights under data protection laws in relation to your 
+          personal data, including the right to:
+        </p>
+        <ul className="text-gray-700 list-disc list-inside space-y-2">
+          <li>Request access to your personal data</li>
+          <li>Request correction of your personal data</li>
+          <li>Request erasure of your personal data</li>
+          <li>Object to processing of your personal data</li>
+          <li>Request restriction of processing your personal data</li>
+          <li>Request transfer of your personal data</li>
+          <li>Right to withdraw consent</li>
+        </ul>
+      </section>
+
+      <div className="mt-8 p-4 bg-gray-50 rounded-lg">
+        <p className="text-gray-700 text-sm">
+          <strong>Last updated:</strong> December 2024<br/>
+          <strong>Contact:</strong> hello@olaraiwe.com
+        </p>
+      </div>
     </div>
   </div>
 )
@@ -198,8 +166,62 @@ const TermsOfServiceContent = () => (
     <div className="prose prose-lg max-w-none">
       <h2 className="text-2xl font-bold mb-6 text-gray-900">Terms of Service</h2>
       
-      {/* ... your existing terms of service content ... */}
-      
+      <section className="mb-8">
+        <h3 className="text-xl font-bold mb-4 text-gray-900">Acceptance of Terms</h3>
+        <p className="text-gray-700">
+          By accessing and using this website, you accept and agree to be bound by the terms and 
+          provision of this agreement. If you do not agree to abide by the above, please do not use this site.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h3 className="text-xl font-bold mb-4 text-gray-900">Use License</h3>
+        <p className="text-gray-700 mb-4">
+          Permission is granted to temporarily view the materials on Olanozun Maria Raiwe&apos;s website for personal, 
+          non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, 
+          and under this license you may not:
+        </p>
+        <ul className="text-gray-700 list-disc list-inside space-y-2">
+          <li>Modify or copy the materials</li>
+          <li>Use the materials for any commercial purpose</li>
+          <li>Attempt to decompile or reverse engineer any software contained on the website</li>
+          <li>Remove any copyright or other proprietary notations from the materials</li>
+          <li>Transfer the materials to another person or &quot;mirror&quot; the materials on any other server</li>
+        </ul>
+      </section>
+
+      <section className="mb-8">
+        <h3 className="text-xl font-bold mb-4 text-gray-900">Disclaimer</h3>
+        <p className="text-gray-700">
+          The materials on Olanozun Maria Raiwe&apos;s website are provided on an &apos;as is&apos; basis. I make no warranties, 
+          expressed or implied, and hereby disclaims and negates all other warranties including, without 
+          limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, 
+          or non-infringement of intellectual property or other violation of rights.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h3 className="text-xl font-bold mb-4 text-gray-900">Limitations</h3>
+        <p className="text-gray-700">
+          In no event shall I or my suppliers be liable for any damages (including, without limitation, 
+          damages for loss of data or profit, or due to business interruption) arising out of the use or 
+          inability to use the materials on this website.
+        </p>
+      </section>
+
+      <section>
+        <h3 className="text-xl font-bold mb-4 text-gray-900">Governing Law</h3>
+        <p className="text-gray-700">
+          These terms and conditions are governed by and construed in accordance with the laws of the United 
+          States and you irrevocably submit to the exclusive jurisdiction of the courts in that location.
+        </p>
+      </section>
+
+      <div className="mt-8 p-4 bg-gray-50 rounded-lg">
+        <p className="text-gray-700 text-sm">
+          <strong>Last updated:</strong> December 2024
+        </p>
+      </div>
     </div>
   </div>
 )
@@ -260,13 +282,8 @@ export default function Footer() {
                   </a>
                 </div>
 
-                {/* Newsletter CTA - Original Style */}
-                <button
-                  onClick={() => setIsNewsletterOpen(true)}
-                  className="text-[#ffffff] hover:text-[#e04e17] transition-colors font-semibold text-xl underline underline-offset-4 hover:scale-105 transform transition-transform"
-                >
-                  Join my newsletter for exclusive insights →
-                </button>
+                {/* Newsletter CTA */}
+                <div>Get Intouch: raiwe@nozun.io</div>
               </div>
             </div>
 
@@ -301,22 +318,22 @@ export default function Footer() {
             <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
               {/* Single line with operating principle and legal links */}
               <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-8 text-lg">
-                <span className="text-[#ffffff] font-medium italic">
+                <span className="text-[#fff] font-medium italic">
                   &ldquo;{currentPrinciple}&rdquo;
                 </span>
                 <button 
                   onClick={() => setIsPrivacyOpen(true)}
-                  className="text-[#ffffff] hover:text-[#e04e17] transition-colors font-medium"
+                  className="text-[#fff] hover:text-[#e04e17] transition-colors font-medium"
                 >
                   Privacy Policy
                 </button>
                 <button 
                   onClick={() => setIsTermsOpen(true)}
-                  className="text-[#ffffff] hover:text-[#e04e17] transition-colors font-medium"
+                  className="text-[#fff] hover:text-[#e04e17] transition-colors font-medium"
                 >
                   Terms of Service
                 </button>
-                <span className="text-[#ffffff] font-medium">© 2024 Olanozun Maria Raiwe</span>
+                <span className="text-[#fff] font-medium">© 2024 Olanozun Maria Raiwe</span>
               </div>
 
               {/* Scroll to Top */}
@@ -327,11 +344,6 @@ export default function Footer() {
       </footer>
 
       {/* Modals */}
-      <NewsletterModal 
-        isOpen={isNewsletterOpen} 
-        onClose={() => setIsNewsletterOpen(false)} 
-      />
-      
       <CustomModal 
         isOpen={isPrivacyOpen} 
         onClose={() => setIsPrivacyOpen(false)}
