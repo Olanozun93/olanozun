@@ -2,6 +2,7 @@ import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { blogPosts } from '@/content/blog-posts'
 import { Calendar, User, ArrowRight, Search } from 'lucide-react'
+import Link from 'next/link'
 
 export default function BlogPage() {
   return (
@@ -43,20 +44,21 @@ export default function BlogPage() {
         <div className="mb-16">
           <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200">
             <div className="p-8 text-center">
-              <h2 className="text-2xl sm:text-3xl font-bold mb-4 gradient-text">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-br from-gray-900 to-gray-700 bg-clip-text text-transparent">
                 The Product Playbook
               </h2>
               <p className="text-gray-700 mb-6 text-lg max-w-2xl mx-auto">
                 My comprehensive framework for product development, from ideation to scale. 
                 Includes battle-tested methodologies for prioritization, roadmapping, and team alignment.
               </p>
-              <Button variant="primary">
-                Access the Playbook <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
+              <Link href="/portfolio#toolkit">
+                <Button className="bg-[#ff581b] text-white border-0 hover:bg-[#e04e18]">
+                  Access the Playbook <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
             </div>
           </Card>
         </div>
-
         {/* Articles Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.map((post) => (

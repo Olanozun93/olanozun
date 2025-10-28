@@ -1,9 +1,9 @@
-import { ReactNode, ButtonHTMLAttributes } from 'react'
+import { ReactNode } from 'react'
 
-// Extend the native button attributes
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps {
   children: ReactNode
   variant?: 'primary' | 'secondary' | 'outline' | 'accent' | 'accent-outline'
+  className?: string
   href?: string
   size?: 'sm' | 'md' | 'lg'
 }
@@ -13,8 +13,7 @@ export const Button = ({
   variant = 'primary', 
   className,
   href,
-  size = 'md',
-  ...props  // This captures all other native button props like type, onClick, disabled, etc.
+  size = 'md'
 }: ButtonProps) => {
   const baseStyles = 'inline-flex items-center justify-center font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 whitespace-nowrap'
   
@@ -43,7 +42,7 @@ export const Button = ({
   }
 
   return (
-    <button {...props} className={buttonClass}>  {/* Spread the props here */}
+    <button className={buttonClass}>
       {children}
     </button>
   )

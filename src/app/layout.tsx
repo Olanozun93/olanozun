@@ -1,18 +1,19 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Hanken_Grotesk } from 'next/font/google'
 import { Header } from '@/components/layout/header'
 import Footer from '@/components/layout/footer'
 import './globals.css'
 
-const inter = Inter({ 
+const hankenGrotesk = Hanken_Grotesk({ 
   subsets: ['latin'],
   display: 'swap',
+  variable: '--font-hanken-grotesk',
 })
 
 export const metadata: Metadata = {
   title: {
-    default: 'Ola Raiwe - Product Leader & Co-Founder',
-    template: '%s | Ola Raiwe'
+    default: 'Olanozun Maria Raiwe - Product Leader & Co-Founder',
+    template: '%s | Olanozun Maria Raiwe'
   },
   description: 'Transforming complex data into intuitive, high-growth consumer products. Product Leader specializing in strategic leadership, product growth, and platform scaling.',
   keywords: ['product management', 'platform scaling', 'AI ethics', 'developer experience', 'product growth', 'Ola Raiwe'],
@@ -70,8 +71,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={inter.className}>
-      <body className="min-h-screen bg-white text-black antialiased">
+    <html lang="en" className={hankenGrotesk.variable}>
+      <body className="font-sans antialiased min-h-screen bg-white text-black">
         <div className="flex min-h-screen flex-col">
           <Header />
           <main className="flex-1">

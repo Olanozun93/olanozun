@@ -1,0 +1,46 @@
+// firestore.rules - Enhanced version
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Newsletter subscribers - double opt-in flow
+    match /newsletterSubscribers/{email} {
+      allow create: if 
+        // Anyone can create new subscriptions
+        request.resource.data.keys().hasAll(['name', 'email', 'verificationToken', 'verificationExpires', 'verified'])
+        && request.resource.data.name is string
+        && request.resource.data.email is string
+        && request.resource.data.verificationToken is string
+        && request.resource.data.verificationExpires is timestamp
+        && request.resource.data.verified is bool
+        && request.resource.data.verified == false;
+      
+      allow update: if 
+        // Only allow verification updates
+        request.resource.data.keys().hasAll(['verified', 'verifiedAt'])
+        && request.resource.data.verified == true
+        && resource.data.verified == false
+        && request.resource.data.verificationToken == null;
+      
+      allow read, write: if request.auth != null; // Admins only
+    }
+    
+    // Contact form submissions
+    match /contactSubmissions/{document} {
+      allow create: if 
+        // Anyone can submit contact forms
+        request.resource.data.keys().hasAll(['name', 'email', 'message', 'submittedAt'])
+        && request.resource.data.name is string
+        && request.resource.data.email is string
+        && request.resource.data.message is string
+        && request.resource.data.submittedAt is timestamp;
+      
+      allow read, write: if request.auth != null; // Admins only
+    }
+    
+    // Optional: Add rules for other collections
+    match /leads/{document} {
+      allow create: if true; // Anyone can create leads
+      allow read, write: if request.auth != null; // Admins only
+    }
+  }
+}

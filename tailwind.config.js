@@ -11,13 +11,16 @@ module.exports = {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
         primary: {
-          black: '#000000',
+          black: '#060708',
           white: '#FFFFFF',
         },
         accent: {
           blue: '#3B82F6',
           'blue-light': '#60A5FA',
           'blue-dark': '#1D4ED8',
+          orange:'#ff581b',
+          'fluorescent-yellow': '#ffc100'
+
         },
         gray: {
           50: '#F9FAFB',
@@ -33,7 +36,7 @@ module.exports = {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Hanken Grotesk', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         xs: ['0.75rem', { lineHeight: '1rem' }],

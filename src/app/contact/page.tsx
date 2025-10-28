@@ -39,11 +39,44 @@ export default function ContactPage() {
     message: ''
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Handle form submission here
-    console.log('Form submitted:', { ...formData, type: selectedType })
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault()
+  
+  try {
+    // Show loading state
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ...formData,
+        engagementType: selectedType
+      }),
+    })
+
+    const result = await response.json()
+
+    if (response.ok) {
+      // Success handling
+      alert(result.message) // Or use a toast notification
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        message: ''
+      })
+      setSelectedType('advisory')
+    } else {
+      // Error handling
+      alert(result.error || 'Something went wrong. Please try again.')
+    }
+  } catch (error) {
+    console.error('Form submission error:', error)
+    alert('Network error. Please check your connection and try again.')
   }
+}
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({

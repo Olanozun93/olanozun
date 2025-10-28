@@ -4,11 +4,81 @@ import { useState } from 'react'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { portfolioData } from '@/content/portfolio-data'
-import { X, Download, TrendingUp, Users, Rocket, Target } from 'lucide-react'
+import { X, ExternalLink, TrendingUp, Users, Rocket, Target, AlertCircle, CheckCircle } from 'lucide-react'
 
 export default function PortfolioPage() {
   const [selectedProject, setSelectedProject] = useState<typeof portfolioData.projects[0] | null>(null)
   const [email, setEmail] = useState('')
+  const [emailError, setEmailError] = useState('')
+  const [accessSuccess, setAccessSuccess] = useState(false)
+
+  // Enhanced email validation
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!email) return 'Email is required'
+    if (!emailRegex.test(email)) return 'Please enter a valid email address'
+    return ''
+  }
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newEmail = e.target.value
+    setEmail(newEmail)
+    
+    // Clear error when user starts typing
+    if (emailError && newEmail) {
+      setEmailError(validateEmail(newEmail))
+    }
+  }
+
+  const handlePlaybookAccess = async () => {
+    // Validate email first
+    const validationError = validateEmail(email)
+    if (validationError) {
+      setEmailError(validationError)
+      return
+    }
+
+    setEmailError('')
+    
+    try {
+      console.log('Playbook accessed by:', email)
+      
+      // Replace with your actual Google Drive link
+      const googleDriveLink = 'https://drive.google.com/file/d/17Q4XWTP0PnQt54T8y-8q552KbYb2GVl5/view?usp=sharing'
+      
+      // Open Google Drive in new tab
+      window.open(googleDriveLink, '_blank', 'noopener,noreferrer')
+      
+      // Show success message
+      setAccessSuccess(true)
+      
+      console.log('Playbook access recorded for:', email)
+      
+      // Reset form after success
+      setTimeout(() => {
+        setEmail('')
+        setAccessSuccess(false)
+      }, 5000)
+      
+    } catch (error) {
+      console.error('Access failed:', error)
+      setEmailError('Unable to redirect. Please try again.')
+    }
+  }
+
+  // Handle form submission on Enter key
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && email && !emailError) {
+      handlePlaybookAccess()
+    }
+  }
+
+  // Validate email on blur
+  const handleEmailBlur = () => {
+    if (email) {
+      setEmailError(validateEmail(email))
+    }
+  }
 
   const metrics = [
     { label: 'Cumulative MAU', value: '50M+', icon: Users, color: 'bg-blue-500' },
@@ -19,11 +89,11 @@ export default function PortfolioPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="container-custom py-20">
+      <div className="container mx-auto px-4 py-20 max-w-7xl">
         
         {/* Product Impact Scorecard */}
         <section className="mb-20">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 gradient-text">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 bg-gradient-to-br from-gray-900 to-gray-700 bg-clip-text text-transparent">
             Product Impact Scorecard: Data-Driven Performance
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -41,24 +111,23 @@ export default function PortfolioPage() {
 
         {/* Case Studies */}
         <section className="mb-20">
-          <h2 className="text-3xl font-bold text-center mb-12 gradient-text">Case Studies</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-br from-gray-900 to-gray-700 bg-clip-text text-transparent">Case Studies</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {portfolioData.projects.map((project) => (
               <Card 
                 key={project.id} 
-                hover 
-                className="p-6 cursor-pointer transition-all duration-300"
+                className="p-6 cursor-pointer transition-all duration-300 hover:shadow-lg"
                 onClick={() => setSelectedProject(project)}
               >
                 <div className={`inline-block px-3 py-1 rounded-full text-sm font-medium mb-4 ${
                   project.type === 'success' 
                     ? 'bg-green-100 text-green-800' 
-                    : 'bg-red-100 text-red-800'
+                    : 'bg-blue-100 text-blue-800'
                 }`}>
                   {project.type === 'success' ? 'Success Story' : 'Learning Experience'}
                 </div>
                 
-                <h3 className="text-xl font-bold mb-3 hover:text-blue-600 transition-colors">
+                <h3 className="text-xl font-bold mb-3 hover:text-[#ff581b] transition-colors">
                   {project.title}
                 </h3>
                 
@@ -68,11 +137,11 @@ export default function PortfolioPage() {
                 
                 <div className="flex items-center justify-between">
                   <span className={`text-sm font-medium ${
-                    project.type === 'success' ? 'text-green-600' : 'text-red-600'
+                    project.type === 'success' ? 'text-green-600' : 'text-blue-600'
                   }`}>
                     {project.type === 'success' ? project.metric : project.insight}
                   </span>
-                  <Button variant="accent-outline" className="w-full">
+                  <Button className="border-[#ff581b] text-[#ff581b] hover:bg-[#ff581b] hover:text-white">
                     {project.type === 'success' ? 'View Case Study' : 'View Lessons Learned'}
                   </Button>
                 </div>
@@ -81,27 +150,72 @@ export default function PortfolioPage() {
           </div>
         </section>
 
-        {/* Toolkit Teaser */}
-        <section>
-          <Card className="max-w-2xl mx-auto text-center p-8 bg-gradient-to-br from-gray-50 to-blue-50">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-4 gradient-text">
-              Download My Product Toolkit
+        {/* Playbook Access Section */}
+        <section id="toolkit">
+          <Card className="max-w-2xl mx-auto text-center p-8 bg-gradient-to-br from-gray-50 to-blue-50 border-2 border-blue-200">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4 bg-gradient-to-br from-gray-900 to-gray-700 bg-clip-text text-transparent">
+              Access My Product Playbook
             </h2>
             <p className="text-gray-600 mb-6 text-lg">
-              Access my battle-tested OKR framework and 3-Year Roadmap Template used by product teams at scale.
+              Get instant access to my battle-tested OKR framework and 3-Year Roadmap Template used by product teams at scale.
             </p>
+            
             <div className="space-y-4 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
-              />
-              <Button variant="primary" className="w-full">
-                <Download className="w-4 h-4 mr-2" />
-                Get the Toolkit
+              {/* Email Input with Validation */}
+              <div className="text-left">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                  Enter your email to access the playbook
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="your.email@company.com"
+                  value={email}
+                  onChange={handleEmailChange}
+                  onBlur={handleEmailBlur}
+                  onKeyPress={handleKeyPress}
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff581b] focus:border-transparent transition-colors ${
+                    emailError ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                  }`}
+                />
+                {emailError && (
+                  <div className="flex items-center gap-2 mt-2 text-red-600 text-sm">
+                    <AlertCircle className="w-4 h-4" />
+                    {emailError}
+                  </div>
+                )}
+              </div>
+
+              {/* Access Button */}
+              <Button 
+                className="w-full bg-[#ff581b] text-white border-0 hover:bg-[#e04e18] disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-300"
+                onClick={handlePlaybookAccess}
+                disabled={!email || !!emailError}
+              >
+                <ExternalLink className="w-4 h-4 mr-2" />
+                Access the Playbook
               </Button>
+
+              {/* Success Message */}
+              {accessSuccess && (
+                <div className="flex items-center gap-2 p-3 bg-green-50 border border-green-200 rounded-lg text-green-700">
+                  <CheckCircle className="w-5 h-5 text-green-600" />
+                  <div className="text-left">
+                    <p className="text-sm font-medium">Success! Opening playbook...</p>
+                    <p className="text-xs text-green-600">The playbook should open in a new tab.</p>
+                  </div>
+                </div>
+              )}
+
+              <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                <p className="text-sm text-yellow-800">
+                  <strong>How it works:</strong> Enter your email and you'll be redirected to Google Drive where you can view or download the playbook.
+                </p>
+              </div>
+
+              <p className="text-sm text-gray-500">
+                You'll also receive occasional product leadership insights (unsubscribe anytime).
+              </p>
             </div>
           </Card>
         </section>
@@ -116,7 +230,7 @@ export default function PortfolioPage() {
                     <div className={`inline-block px-3 py-1 rounded-full text-sm font-medium mb-2 ${
                       selectedProject.type === 'success' 
                         ? 'bg-green-100 text-green-800' 
-                        : 'bg-red-100 text-red-800'
+                        : 'bg-blue-100 text-blue-800'
                     }`}>
                       {selectedProject.type === 'success' ? 'Success Story' : 'Learning Experience'}
                     </div>
@@ -143,9 +257,9 @@ export default function PortfolioPage() {
                   )}
                   
                   {selectedProject.type === 'failure' && (
-                    <div className="bg-red-50 border border-red-200 rounded-lg p-4 my-4">
-                      <strong className="text-red-800">Key Learning:</strong>{' '}
-                      <span className="text-red-700">{selectedProject.insight}</span>
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 my-4">
+                      <strong className="text-blue-800">Key Learning:</strong>{' '}
+                      <span className="text-blue-700">{selectedProject.insight}</span>
                     </div>
                   )}
                   

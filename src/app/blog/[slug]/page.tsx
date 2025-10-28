@@ -1,15 +1,41 @@
-export default function BlogPage() {
-  return (
-    <div className="min-h-screen bg-gray-50 py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4">Blog</h1>
-          <p className="text-gray-600">Blog page is loading...</p>
-          <div className="mt-8">
-            <a href="/" className="text-blue-600 underline">Back to Home</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
+import { notFound } from 'next/navigation'
+import { blogPosts } from '@/content/blog-posts'
+import BlogPostClient from './BlogPostClient'
+
+interface BlogPostPageProps {
+  params: {
+    slug: string
+  }
+}
+
+export default function BlogPostPage({ params }: BlogPostPageProps) {
+  const post = blogPosts.find((post) => post.slug === params.slug)
+
+  if (!post) {
+    notFound()
+  }
+
+  // Pass the post data to the client component
+  return <BlogPostClient post={post} />
+}
+
+export async function generateStaticParams() {
+  return blogPosts.map((post) => ({
+    slug: post.slug,
+  }))
+}
+
+export async function generateMetadata({ params }: BlogPostPageProps) {
+  const post = blogPosts.find((post) => post.slug === params.slug)
+  
+  if (!post) {
+    return {
+      title: 'Article Not Found',
+    }
+  }
+
+  return {
+    title: `${post.title} | Ola Raiwe`,
+    description: post.excerpt,
+  }
 }
