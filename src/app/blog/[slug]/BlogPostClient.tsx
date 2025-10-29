@@ -183,17 +183,16 @@ const ShareModal = ({ isOpen, onClose, post, url }: { isOpen: boolean; onClose: 
           {/* Native Share Fallback */}
           <div className="pt-4 border-t border-gray-200">
             <Button
-              onClick={async () => {
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                e.preventDefault();
                 if (navigator.share) {
-                  try {
-                    await navigator.share({
-                      title: post.title,
-                      text: post.excerpt,
-                      url: url,
-                    })
-                  } catch (err) {
-                    // User cancelled share
-                  }
+                  navigator.share({
+                    title: post.title,
+                    text: post.excerpt,
+                    url: url,
+                  }).catch(() => {
+                    // User cancelled share - no need to do anything
+                  });
                 }
               }}
               className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white border-0 hover:from-blue-600 hover:to-blue-700"
