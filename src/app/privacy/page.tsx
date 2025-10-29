@@ -15,7 +15,7 @@ export default function PrivacyPolicy() {
               <section>
                 <h2 className="text-2xl font-bold mb-4 gradient-text">Introduction</h2>
                 <p className="text-gray-700 leading-relaxed">
-                  Welcome to Ola Raiwe&apos;s website. I respect your privacy and am committed to protecting 
+                  Welcome to Olanozun Maria Raiwe&apos;s website. I respect your privacy and am committed to protecting 
                   your personal data. This privacy policy will inform you about how I look after your 
                   personal data when you visit my website and tell you about your privacy rights.
                 </p>
@@ -81,8 +81,8 @@ export default function PrivacyPolicy() {
                 </p>
                 <div className="mt-4 p-4 bg-gray-100 rounded-lg">
                   <p className="text-gray-700">
-                    <strong>Email:</strong> hello@olaraiwe.com<br/>
-                    <strong>Website:</strong> https://olaraiwe.com/contact
+                    <strong>Email:</strong> hello@nozun.io<br/>
+                    <strong>Website:</strong> https://olanozun.com/contact
                   </p>
                 </div>
               </section>

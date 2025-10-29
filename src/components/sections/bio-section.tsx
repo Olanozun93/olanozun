@@ -39,7 +39,7 @@ export default function BioSection() {
             {/* Bio Content */}
             <div className="text-center lg:text-left">
               <h2 className="text-3xl sm:text-4xl font-bold mb-6 gradient-text">
-                About Ola Raiwe
+                About Olanozun Maria Raiwe
               </h2>
               
               <div className="space-y-4 text-gray-700 leading-relaxed">

@@ -3,6 +3,9 @@ import { Hanken_Grotesk } from 'next/font/google'
 import { Header } from '@/components/layout/header'
 import Footer from '@/components/layout/footer'
 import './globals.css'
+import { Analytics} from '@vercel/analytics/react'
+import {SpeedInsights} from '@vercel/speed-insights/next'
+
 
 const hankenGrotesk = Hanken_Grotesk({ 
   subsets: ['latin'],
@@ -16,7 +19,7 @@ export const metadata: Metadata = {
     template: '%s | Olanozun Maria Raiwe'
   },
   description: 'Transforming complex data into intuitive, high-growth consumer products. Product Leader specializing in strategic leadership, product growth, and platform scaling.',
-  keywords: ['product management', 'platform scaling', 'AI ethics', 'developer experience', 'product growth', 'Ola Raiwe'],
+  keywords: ['product management', 'platform scaling', 'AI ethics', 'developer experience', 'product growth', 'Olanozun Maria Raiwe'],
   authors: [{ name: 'Olanozun Maria Raiwe' }],
   creator: 'Olanozun Maria Raiwe',
   publisher: 'Olanozun Maria Raiwe',
@@ -25,29 +28,29 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://olaraiwe.com'),
+  metadataBase: new URL('https://olanozun.com'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://olaraiwe.com',
-    title: 'Ola Raiwe - Product Leader & Co-Founder',
+    url: 'https://olanozun.com',
+    title: 'Olanozun Maria Raiwe - Product Leader & Co-Founder',
     description: 'Transforming complex data into intuitive, high-growth consumer products.',
-    siteName: 'Ola Raiwe',
+    siteName: 'Olanozun Maria Raiwe',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Ola Raiwe - Product Leader',
+        alt: 'Olanozun Maria Raiwe - Product Leader',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ola Raiwe - Product Leader & Co-Founder',
+    title: 'Olanozun Maria Raiwe - Product Leader & Co-Founder',
     description: 'Transforming complex data into intuitive, high-growth consumer products.',
     creator: '@olaraiwe',
     images: ['/og-image.jpg'],
@@ -77,6 +80,8 @@ export default function RootLayout({
           <Header />
           <main className="flex-1">
             {children}
+            <SpeedInsights/>
+            < Analytics/>
           </main>
           <Footer />
         </div>

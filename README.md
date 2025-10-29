@@ -1,4 +1,4 @@
-# Ola Raiwe - Product Leader Website
+# Olanozun Maria Raiwe - Product Leader Website
 
 A professional website for Olanozun Maria Raiwe, showcasing expertise in product management, platform scaling, and technology leadership.
 

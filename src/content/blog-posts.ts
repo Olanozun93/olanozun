@@ -4,7 +4,7 @@ export const blogPosts = [
     title: "The Paradox of the Generalist AI",
     slug: "paradox-generalist-ai",
     date: "2024-12-01",
-    author: "Ola Raiwe",
+    author: "Olanozun Maria Raiwe",
     excerpt: "Exploring the balance between specialized AI systems and general-purpose models in enterprise environments.",
     content: `
       <div class="article-intro">
@@ -192,7 +192,7 @@ export const blogPosts = [
   title: "Scaling the Unscalable: Principles of Decentralized Platforms",
   slug: "scaling-decentralized-platforms",
   date: "2024-11-15",
-  author: "Ola Raiwe",
+  author: "Olanozun Maria Raiwe",
   excerpt: "Architectural patterns for building resilient decentralized systems that can handle exponential growth while maintaining performance and reliability.",
   content: `
     <div class="article-intro">
@@ -519,7 +519,7 @@ export const blogPosts = [
     title: "Measuring Developer Happiness as a Core Metric",
     slug: "developer-happiness-core-metric",
     date: "2024-11-01",
-    author: "Ola Raiwe",
+    author: "Olanozun Maria Raiwe",
     excerpt: "Why Developer Experience (DX) metrics are becoming as important as business KPIs for platform success and how to measure what actually matters.",
     content: `
       <div class="article-intro">
@@ -781,7 +781,7 @@ export const blogPosts = [
     title: "Scalable AI Prompt Development: Empowering No-Code/Low-Code Innovators",
     slug: "scalable-ai-prompt-development",
     date: "2024-10-01",
-    author: "Ola Raiwe",
+    author: "Olanozun Maria Raiwe",
     excerpt: "Systematic approaches to creating reusable, effective AI prompts that scale across organizations and use cases while empowering non-technical teams.",
     content: `
       <div class="article-intro">

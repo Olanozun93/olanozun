@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
   }
 
   return {
-    title: `${post.title} | Ola Raiwe`,
+    title: `${post.title} | Olanozun Maria Raiwe`,
     description: post.excerpt,
   }
 }

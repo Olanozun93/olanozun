@@ -23,7 +23,7 @@ export default function TermsOfService() {
               <section>
                 <h2 className="text-2xl font-bold mb-4 gradient-text">Use License</h2>
                 <p className="text-gray-700 leading-relaxed">
-                  Permission is granted to temporarily view the materials on Ola Raiwe&apos;s website for personal, 
+                  Permission is granted to temporarily view the materials on Olanozun Maria Raiwe&apos;s website for personal, 
                   non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, 
                   and under this license you may not:
                 </p>
@@ -39,7 +39,7 @@ export default function TermsOfService() {
               <section>
                 <h2 className="text-2xl font-bold mb-4 gradient-text">Disclaimer</h2>
                 <p className="text-gray-700 leading-relaxed">
-                  The materials on Ola Raiwe&apos;s website are provided on an &apos;as is&apos; basis. Ola Raiwe makes no warranties, 
+                  The materials on Olanozun Maria Raiwe&apos;s website are provided on an &apos;as is&apos; basis. Olanozun Maria  Raiwe makes no warranties, 
                   expressed or implied, and hereby disclaims and negates all other warranties including, without 
                   limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, 
                   or non-infringement of intellectual property or other violation of rights.
@@ -49,9 +49,9 @@ export default function TermsOfService() {
               <section>
                 <h2 className="text-2xl font-bold mb-4 gradient-text">Limitations</h2>
                 <p className="text-gray-700 leading-relaxed">
-                  In no event shall Ola Raiwe or her suppliers be liable for any damages (including, without limitation, 
+                  In no event shall Olanozun Maria  Raiwe or her suppliers be liable for any damages (including, without limitation, 
                   damages for loss of data or profit, or due to business interruption) arising out of the use or 
-                  inability to use the materials on this website, even if Ola Raiwe or an authorized representative 
+                  inability to use the materials on this website, even if Olanozun Maria  Raiwe or an authorized representative 
                   has been notified orally or in writing of the possibility of such damage.
                 </p>
               </section>
@@ -60,7 +60,7 @@ export default function TermsOfService() {
                 <h2 className="text-2xl font-bold mb-4 gradient-text">Accuracy of Materials</h2>
                 <p className="text-gray-700 leading-relaxed">
                   The materials appearing on this website could include technical, typographical, or photographic 
-                  errors. Ola Raiwe does not warrant that any of the materials on its website are accurate, complete, 
+                  errors. Olanozun Maria  Raiwe does not warrant that any of the materials on its website are accurate, complete, 
                   or current. Changes may be made to the materials contained on the website at any time without notice.
                 </p>
               </section>
@@ -68,8 +68,8 @@ export default function TermsOfService() {
               <section>
                 <h2 className="text-2xl font-bold mb-4 gradient-text">Links</h2>
                 <p className="text-gray-700 leading-relaxed">
-                  Ola Raiwe has not reviewed all of the sites linked to its website and is not responsible for the 
-                  contents of any such linked site. The inclusion of any link does not imply endorsement by Ola Raiwe 
+                  Olanozun Maria  Raiwe has not reviewed all of the sites linked to its website and is not responsible for the 
+                  contents of any such linked site. The inclusion of any link does not imply endorsement by Olanozun Maria  Raiwe 
                   of the site. Use of any such linked website is at the user&apos;s own risk.
                 </p>
               </section>
@@ -77,7 +77,7 @@ export default function TermsOfService() {
               <section>
                 <h2 className="text-2xl font-bold mb-4 gradient-text">Modifications</h2>
                 <p className="text-gray-700 leading-relaxed">
-                  Ola Raiwe may revise these terms of service for its website at any time without notice. By using 
+                  Olanozun Maria Raiwe may revise these terms of service for its website at any time without notice. By using 
                   this website you are agreeing to be bound by the then current version of these terms of service.
                 </p>
               </section>
