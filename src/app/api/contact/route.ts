@@ -83,62 +83,62 @@ export async function POST(request: NextRequest) {
 
     // Send automated confirmation to user
     await sendEmail({
-      to: email,
-      from: process.env.FROM_EMAIL!,
-      subject: 'Thank you for reaching out!',
-      html: `
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <style>
-                body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-                .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-                .header { background: linear-gradient(135deg, #ff581b, #ff7e50); color: white; padding: 30px; text-align: center; border-radius: 8px; margin-bottom: 20px; }
-                .content { background: #f8f9fa; padding: 20px; border-radius: 8px; }
-                .next-steps { background: white; padding: 15px; border-radius: 5px; border-left: 4px solid #ff581b; margin: 20px 0; }
-                .footer { text-align: center; margin-top: 30px; color: #666; font-size: 14px; }
-            </style>
-        </head>
-        <body>
-            <div class="container">
-                <div class="header">
-                    <h1>Thank You for Reaching Out!</h1>
-                    <p>I've received your message and will get back to you within 24 hours.</p>
-                </div>
-                
-                <div class="content">
-                    <h3>Hello ${name},</h3>
-                    
-                    <p>Thank you for your interest in <strong>${engagementType.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</strong>. I'm excited to learn more about your project and how we can work together.</p>
-                    
-                    <div class="next-steps">
-                        <h4>What happens next?</h4>
-                        <ul>
-                            <li>I'll review your message carefully</li>
-                            <li>We'll schedule a discovery call to understand your needs</li>
-                            <li>I'll provide a tailored proposal with clear next steps</li>
-                        </ul>
-                    </div>
-                    
-                    <p><strong>In the meantime:</strong><br>
-                    Feel free to explore my <a href="https://nozun.io/portfolio#toolkit" style="color: #ff581b;">Product Playbook</a> for insights into my product leadership framework.</p>
-                    
-                    <p>Looking forward to our conversation!</p>
-                    
-                    <p>Best regards,<br>
-                    <strong>Raivis</strong><br>
-                    Product Leader & Strategist</p>
-                </div>
-                
-                <div class="footer">
-                    <p>Nozun Ltd<br>
-                    <a href="mailto:${process.env.ADMIN_EMAIL}" style="color: #666;">${process.env.ADMIN_EMAIL}</a></p>
-                </div>
+  to: email,
+  from: process.env.FROM_EMAIL!,
+  subject: 'Thank you for reaching out!',
+  html: `
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background: linear-gradient(135deg, #ff581b, #ff7e50); color: white; padding: 30px; text-align: center; border-radius: 8px; margin-bottom: 20px; }
+            .content { background: #f8f9fa; padding: 20px; border-radius: 8px; }
+            .next-steps { background: white; padding: 15px; border-radius: 5px; border-left: 4px solid #ff581b; margin: 20px 0; }
+            .footer { text-align: center; margin-top: 30px; color: #666; font-size: 14px; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Thank You for Reaching Out!</h1>
+                <p>I've received your message and will get back to you within 24 hours.</p>
             </div>
-        </body>
-        </html>
-      `
-    })
+            
+            <div class="content">
+                <h3>Hello ${name},</h3>
+                
+                <p>Thank you for your interest in <strong>${engagementType.replace(/-/g, ' ').replace(/\b\w/g, (letter: string) => letter.toUpperCase())}</strong>. I'm excited to learn more about your project and how we can work together.</p>
+                
+                <div class="next-steps">
+                    <h4>What happens next?</h4>
+                    <ul>
+                        <li>I'll review your message carefully</li>
+                        <li>We'll schedule a discovery call to understand your needs</li>
+                        <li>I'll provide a tailored proposal with clear next steps</li>
+                    </ul>
+                </div>
+                
+                <p><strong>In the meantime:</strong><br>
+                Feel free to explore my <a href="https://nozun.io/portfolio#toolkit" style="color: #ff581b;">Product Playbook</a> for insights into my product leadership framework.</p>
+                
+                <p>Looking forward to our conversation!</p>
+                
+                <p>Best regards,<br>
+                <strong>Raivis</strong><br>
+                Product Leader & Strategist</p>
+            </div>
+            
+            <div class="footer">
+                <p>Nozun Ltd<br>
+                <a href="mailto:${process.env.ADMIN_EMAIL}" style="color: #666;">${process.env.ADMIN_EMAIL}</a></p>
+            </div>
+        </div>
+    </body>
+    </html>
+  `
+})
 
     return NextResponse.json({
       message: 'Message sent successfully!'
