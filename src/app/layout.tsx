@@ -5,6 +5,7 @@ import Footer from '@/components/layout/footer'
 import './globals.css'
 import { Analytics} from '@vercel/analytics/react'
 import {SpeedInsights} from '@vercel/speed-insights/next'
+import GoogleAnalytics from '@/components/GoogleAnalytics'
 
 
 const hankenGrotesk = Hanken_Grotesk({ 
@@ -31,6 +32,26 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://olanozun.com'),
   alternates: {
     canonical: '/',
+  },
+  icons:{
+    icon:[
+      {url:'/Ola.ico'},
+      {url: '/O.png', sizes:'16x16', type: 'image/png'},
+      {url: '/O-32.png', sizes:'32x32', type: 'image/png'},
+    ],
+    apple:[
+      {url: '/apple-touch-icon.png'},
+    ],
+    other:[
+      {
+        rel:'icon',
+        url:'/android-chrome-192.png',
+        sizes:'192x192', type:'image/png',
+      },
+      {
+        rel:'icon', url:'/android-chrome-512.png', sizes:'512x512', type:'image/png',
+      },
+    ],
   },
   openGraph: {
     type: 'website',
@@ -82,6 +103,7 @@ export default function RootLayout({
             {children}
             <SpeedInsights/>
             < Analytics/>
+            <GoogleAnalytics/>
           </main>
           <Footer />
         </div>

@@ -31,40 +31,47 @@ export default function PortfolioPage() {
   }
 
   const handlePlaybookAccess = async () => {
-    // Validate email first
-    const validationError = validateEmail(email)
-    if (validationError) {
-      setEmailError(validationError)
-      return
-    }
+  const validationError = validateEmail(email)
+  if (validationError) {
+    setEmailError(validationError)
+    return
+  }
 
-    setEmailError('')
-    
-    try {
-      console.log('Playbook accessed by:', email)
-      
-      // Replace with your actual Google Drive link
-      const googleDriveLink = 'https://drive.google.com/file/d/17Q4XWTP0PnQt54T8y-8q552KbYb2GVl5/view?usp=sharing'
-      
+  setEmailError('')
+  
+  try {
+    // Call the API endpoint
+    const response = await fetch('/api/playbook', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    })
+
+    const result = await response.json()
+
+    if (response.ok) {
       // Open Google Drive in new tab
+      const googleDriveLink = 'https://drive.google.com/file/d/17Q4XWTP0PnQt54T8y-8q552KbYb2GVl5/view?usp=sharing'
       window.open(googleDriveLink, '_blank', 'noopener,noreferrer')
       
       // Show success message
       setAccessSuccess(true)
-      
-      console.log('Playbook access recorded for:', email)
       
       // Reset form after success
       setTimeout(() => {
         setEmail('')
         setAccessSuccess(false)
       }, 5000)
-      
-    } catch (error) {
-      console.error('Access failed:', error)
-      setEmailError('Unable to redirect. Please try again.')
+    } else {
+      setEmailError(result.error || 'Unable to process your request. Please try again.')
     }
+  } catch (error) {
+    console.error('Access failed:', error)
+    setEmailError('Network error. Please check your connection and try again.')
   }
+}
 
   // Handle form submission on Enter key
   const handleKeyPress = (e: React.KeyboardEvent) => {

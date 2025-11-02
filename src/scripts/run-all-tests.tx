@@ -1,0 +1,53 @@
+import { testDatabase } from './test-database'
+import { testEmail } from './test-email'
+import { testContactAPI } from './test-contact-api'
+import { testPlaybookAPI } from './test-playbook-api'
+
+async function runAllTests() {
+  console.log('🚀 Starting Comprehensive Test Suite\n')
+  console.log('='.repeat(50))
+
+  const results = {
+    database: false,
+    email: false,
+    contactApi: false,
+    playbookApi: false
+  }
+
+  // Run tests in sequence
+  results.database = await testDatabase()
+  console.log('\n' + '='.repeat(50))
+
+  results.email = await testEmail()
+  console.log('\n' + '='.repeat(50))
+
+  // Make sure your dev server is running for API tests
+  console.log('⚠️  Make sure your dev server is running (npm run dev)')
+  console.log('   Waiting 2 seconds before API tests...\n')
+  await new Promise(resolve => setTimeout(resolve, 2000))
+
+  results.contactApi = await testContactAPI()
+  console.log('\n' + '='.repeat(50))
+
+  results.playbookApi = await testPlaybookAPI()
+  console.log('\n' + '='.repeat(50))
+
+  // Summary
+  console.log('📊 TEST SUMMARY:')
+  console.log('='.repeat(50))
+  Object.entries(results).forEach(([test, passed]) => {
+    console.log(`   ${test}: ${passed ? '✅ PASS' : '❌ FAIL'}`)
+  })
+
+  const allPassed = Object.values(results).every(result => result)
+  console.log('\n' + '='.repeat(50))
+  
+  if (allPassed) {
+    console.log('🎉 ALL TESTS PASSED! Ready for production deployment.')
+  } else {
+    console.log('❌ SOME TESTS FAILED. Please fix issues before deployment.')
+  }
+}
+
+// Run all tests
+runAllTests()

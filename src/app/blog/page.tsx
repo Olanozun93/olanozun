@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button'
 import { blogPosts } from '@/content/blog-posts'
 import { Calendar, User, ArrowRight, Search } from 'lucide-react'
 import Link from 'next/link'
+import GoogleAnalytics from '@/components/GoogleAnalytics'
 
 export default function BlogPage() {
   return (

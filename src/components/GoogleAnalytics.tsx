@@ -1,13 +1,17 @@
 'use client'
 
 import Script from 'next/script'
+import { usePathname, useSearchParams } from 'next/navigation'
+import { useEffect } from 'react'
+
+const GA_MEASUREMENT_ID = 'G-FHL2W5LJ3K'
 
 export default function GoogleAnalytics() {
   return (
     <>
       <Script
         strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=G-R6DFS9VD5H`}
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
       />
       <Script
         id="google-analytics"
@@ -17,7 +21,7 @@ export default function GoogleAnalytics() {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-R6DFS9VD5H');
+            gtag('config', '${GA_MEASUREMENT_ID}');
           `,
         }}
       />
